@@ -7,11 +7,12 @@ const path = require('path');
 module.exports = (app) => {
   // HTML gets: handles when users "visit" a page
 
+  // notes page
   app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/notes.html'));
   });
 
-  // gets user to to home
+  // homepage
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
