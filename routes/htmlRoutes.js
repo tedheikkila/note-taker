@@ -3,7 +3,6 @@
 const path = require('path');
 
 // routing:
-
 module.exports = (app) => {
   // HTML gets: handles when users "visit" a page
 

@@ -1,70 +1,57 @@
-// loading in data; linking routes to data sources; sources hold notes
+// loading in json data; linking routes to data source
 
-let notesData = require('../db/db.json');
-// use jsonfile npm to add readable format and potentially unique id
-let jsonfile = require('jsonfile')
-const fs = require('fs')
+const fs = require('fs');
+const path = require('path');
+let notesData = require('../db/db.json')
 
+module.exports = app => {
 
-// routing
-module.exports = (app) => {
-  // API gets; (ex: localhost:PORT/api/notes...user shown a JSON of data in table)
-  app.get('/api/notes', (req, res) => res.json(notesData));
+  // setup notes var
+  fs.readFile('db/db.json',"utf8", (err, data) => {
 
-  // API posts; handles when a user submits a form and thus submits data to the server
-  // need a specific npm package to give each push a unique id and push to db.json file
-  app.post('/api/notes', (req, res) => {
-    if (notesData.length < 100) {
+      if (err) throw err;
 
-      console.log(req.body);
+      console.log(data)
 
-      let id = Math.floor((Math.random()*100)+1);
-      let title = req.body.title;
-      let description = req.body.description;
-      let note = {"Id": id, "Title": title, "Description": description};
-      
-      fs.readFile('db.json','utf8', function(err,notesData){
-        let obj = JSON.parse(notesData);
-        obj.push(note);
-        let noteString = JSON.stringify(obj);
-        //jsonfile.writeFile('db.json, noteString, {spaces:2}, function...)
-        fs.writeFile('db.json', noteString, function(err){
-            if(err) return console.log(err);
-            console.log('note added to db.json file');
-        });
+      // store data of db.json file in notes
+      let notes = JSON.parse(data);
 
-      })
+      app.get("/api/notes", function(req, res) {
+          // read db.json file and return saved notes as json 
+          res.json(notes);
+      });
 
-      res.json(true);
+      // post to api/notes
+      app.post("/api/notes", function(req, res) {
+          // receives new note, adds it to db.json, then returns new note
+          let newNote = req.body;
+          notes.push(newNote);
+          notesData.push(req.body)
+          updateNotes();
+          return console.log("added: " + newNote.title);
+      });
 
-    } else {
-      res.json(false);
-    }
+      // retrieves note with specific id
+      app.get("/api/notes/:id", function(req,res) {
+          // display json for the notes array indices for provided id
+          res.json(notes[req.params.id]);
+      });
+
+      // updates json file when a note is added or deleted
+     function updateNotes() {
+      fs.writeFile("db/db.json", JSON.stringify(notes),err => {
+          if (err) throw err;
+          return true;
+      });
+      }
+
+      // deletes a note for an id
+      // app.delete("/api/notes/:id", function(req, res) {
+      //     notes.splice(req.params.id, 1);
+      //     updateNotes();
+      //     console.log("deleted note: " + req.params.id);
+      // });
+
   });
 
-
-  // delete data (do last)
-  app.delete('/api/notes/:id', (req, res) => {
-    // empties out the id's content (reads all db, remove id, rewrite to db file)
-    // something like notesData.id.length = 0
-    notesData.length = 0;
-
-    res.json({ ok: true });
-  });
 }
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
