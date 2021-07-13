@@ -11,16 +11,9 @@ module.exports = (app) => {
   // API posts; handles when a user submits a form and thus submits data to the server
   // need a specific npm package to give each of these pushes a unique id
   app.post('/api/notes', (req, res) => {
-    if (notesData.length < 100) {
+  
       notesData.push(req.body);
-      res.json(true);
-
-
-
-
-    } else {
-      res.json(false);
-    }
+    
   });
 
   // delete data (do last)
