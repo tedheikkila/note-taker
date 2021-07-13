@@ -1,6 +1,7 @@
 // loading in data; linking routes to data sources; sources hold notes
 
 const notesData = require('../db/db.json');
+const fs = require('fs')
 
 // routing
 
@@ -12,8 +13,16 @@ module.exports = (app) => {
   // need a specific npm package to give each push a unique id and push to db.json file
   app.post('/api/notes', (req, res) => {
     if (notesData.length < 100) {
+
+      // const jsonString = JSON.stringify(req.body)
+      
+      // fs.writeFileSync('./db/db.json', jsonString)
+
       notesData.push(req.body);
+
       res.json(true);
+
+
 
 
 
@@ -27,7 +36,7 @@ module.exports = (app) => {
   // delete data (do last)
   app.delete('/api/notes/:id', (req, res) => {
     // empties out the id's content (reads all db, remove id, rewrite to db file)
-    // something like notesData.id.length = 0 for end product
+    // something like notesData.id.length = 0
     notesData.length = 0;
 
     res.json({ ok: true });
