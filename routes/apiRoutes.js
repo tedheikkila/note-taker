@@ -1,10 +1,12 @@
 // loading in data; linking routes to data sources; sources hold notes
 
-const notesData = require('../db/db.json');
+let notesData = require('../db/db.json');
+// use jsonfile npm to add readable format and potentially unique id
+let jsonFile = require('jsonfile')
 const fs = require('fs')
 
-// routing
 
+// routing
 module.exports = (app) => {
   // API gets; (ex: localhost:PORT/api/notes...user shown a JSON of data in table)
   app.get('/api/notes', (req, res) => res.json(notesData));
@@ -14,18 +16,25 @@ module.exports = (app) => {
   app.post('/api/notes', (req, res) => {
     if (notesData.length < 100) {
 
-      // const jsonString = JSON.stringify(req.body)
-      
-      // fs.writeFileSync('./db/db.json', jsonString)
+      console.log(req.body);
 
-      notesData.push(req.body);
+      let id = Math.floor((Math.random()*100)+1);
+      let title = req.body.title;
+      let description = req.body.description;
+      let note = {"Id": id, "Title": title, "Description": description};
+      
+      fs.readFile('db.json','utf8', function(err,data){
+        let obj = JSON.parse(data);
+        obj.push(note);
+        let noteString = JSON.stringify(obj);
+        fs.writeFile('db.json', noteString, function(err){
+            if(err) return console.log(err);
+            console.log('note added to db.json file');
+        });
+
+      })
 
       res.json(true);
-
-
-
-
-
 
     } else {
       res.json(false);
@@ -42,6 +51,8 @@ module.exports = (app) => {
     res.json({ ok: true });
   });
 }
+
+
 
 
 
