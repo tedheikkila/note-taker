@@ -2,7 +2,7 @@
 
 let notesData = require('../db/db.json');
 // use jsonfile npm to add readable format and potentially unique id
-let jsonFile = require('jsonfile')
+let jsonfile = require('jsonfile')
 const fs = require('fs')
 
 
@@ -23,10 +23,11 @@ module.exports = (app) => {
       let description = req.body.description;
       let note = {"Id": id, "Title": title, "Description": description};
       
-      fs.readFile('db.json','utf8', function(err,data){
-        let obj = JSON.parse(data);
+      fs.readFile('db.json','utf8', function(err,notesData){
+        let obj = JSON.parse(notesData);
         obj.push(note);
         let noteString = JSON.stringify(obj);
+        //jsonfile.writeFile('db.json, noteString, {spaces:2}, function...)
         fs.writeFile('db.json', noteString, function(err){
             if(err) return console.log(err);
             console.log('note added to db.json file');
