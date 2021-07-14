@@ -15,11 +15,13 @@
 
   What is this app and what does it do:
 
-  This app is designed for a user who wants to add pertinent info into a note taking system. Using mainly Express, the note taker adds a note, saves the entered text, and appends this as a new note. Additionally, the user can delete any note they'd like to once the user no longer deems it necessary.
+  This app is designed for a user who wants to add info into a note taking system. Using mainly Express, the note taker adds a note, saves the entered text, and appends this as a new note. Additionally, the user can delete any note they'd like to once the user no longer deems it necessary.
 
-  Technologies used were: HTML, CSS, jQuery, Bootstrap, Javascript, Node, Express, fs, path, markdown, and Git. Please render on Chrome for best results. 
+  Technologies used were: HTML, CSS, jQuery, Bootstrap, Javascript, Node, Express, fs, path, markdown, Git, and Heroku. Please render on Chrome for best results. 
 
-  Checkout the deployed application here >> https://tedheikkila.github.io/note-taker/ 
+  * Check out deployed app on GitHub >> https://tedheikkila.github.io/note-taker/ 
+
+  * Check out deployed app on Heroku >> https://fatidique-saucisson-41554.herokuapp.com/  
 
   ## Installation
 

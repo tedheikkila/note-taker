@@ -6,7 +6,7 @@ const app = express();
 const database = require('./db/db.json');
 
 // sets an initial port to environment or 8080; use this later in our listener
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
