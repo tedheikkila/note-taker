@@ -50,7 +50,7 @@ module.exports = app => {
       
       //splices out note from array of objects when db id = param id
       for (let i = 0; i < notesData.length; i++) {
-
+        //this is still bugged here
         if (notesData[i].id == req.params.id) {
 
         notesData.splice(i, 1);
