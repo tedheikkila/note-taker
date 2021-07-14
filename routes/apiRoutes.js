@@ -18,7 +18,7 @@ module.exports = app => {
     let newNote = req.body;
 
     // setting up id's for pushes/save events
-    let idEl = 20
+    let idEl = 0
     for (let i = 0; i < notesData.length; i++) {
       let oneNote = notesData[i];
 
@@ -39,27 +39,30 @@ module.exports = app => {
       } console.log("note saved")
     });
 
-    // sends to new note to client
+    // sends to new note to browser
     res.json(newNote)
-
   })
 
   // delete a note w/specific id
-  app.delete('api/notes/:id', function (req, res) {
+  app.delete('api/notes/', function (req, res) {
       let jsonPath = path.join(__dirname, "../db/db.json")
+
+      console.log(jsonPath)
       
       //splices out note from array of objects when db id = param id
       for (let i = 0; i < notesData.length; i++) {
-        //this is still bugged here
-        if (notesData[i].id == req.params.id) {
+        // finding id match
+        let target = notesData[i].id
+        console.log(notesData[i].id)
+        if (target == req.body.id) {
 
-        notesData.splice(i, 1);
+        notesData.splice(target, 1);
         break;
         }
       }
 
       // re-write db file again w/ note now removed from db
-      fs.writeFileSync(jsonPath, JSON.stringify(notesData), function (err) {
+      fs.writeFile(jsonPath, JSON.stringify(notesData), function (err) {
         if(err) {
           return console.log(err)
         } else {
