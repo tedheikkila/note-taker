@@ -5,6 +5,16 @@ body {
   padding: 0;
 }
 
+.navbar-brand {
+  font-size: 30px;
+  margin-left: 7%;
+}
+
+.jumbotron {
+  background: peachpuff;
+  border-radius: 10px;
+}
+
 .save-note {
   display: none;
 }
@@ -34,11 +44,12 @@ body {
   height: 50px;
   margin-top: 13px;
   font-size: 3rem;
+  color:black
 }
 
 .note-title:read-only,
 .note-textarea:read-only {
-  color: #757575;
+  color: black;
 }
 
 .list-container .card {
@@ -46,6 +57,7 @@ body {
   border-bottom: none;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+  background-color: peachpuff;
 }
 
 .list-container {

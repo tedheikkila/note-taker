@@ -21,7 +21,8 @@
 
   * Check out deployed app on GitHub >> https://tedheikkila.github.io/note-taker/ 
 
-  * Check out deployed app on Heroku >> https://fatidique-saucisson-41554.herokuapp.com/  
+  * Check out deployed app on Heroku >>   https://fatidique-saucisson-41554.herokuapp.com/ 
+
 
   ## Installation
 
