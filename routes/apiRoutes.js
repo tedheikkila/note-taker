@@ -44,25 +44,22 @@ module.exports = app => {
   })
 
   // delete a note w/specific id
-  app.delete('api/notes/', function (req, res) {
+  app.delete('/api/notes/:id', function (req, res) {
       let jsonPath = path.join(__dirname, "../db/db.json")
-
-      console.log(jsonPath)
       
       //splices out note from array of objects when db id = param id
       for (let i = 0; i < notesData.length; i++) {
         // finding id match
         let target = notesData[i].id
-        console.log(notesData[i].id)
-        if (target == req.body.id) {
+        if (target == req.params.id) {
 
-        notesData.splice(target, 1);
+        notesData.splice(i, 1);
         break;
         }
       }
 
       // re-write db file again w/ note now removed from db
-      fs.writeFile(jsonPath, JSON.stringify(notesData), function (err) {
+      fs.writeFileSync(jsonPath, JSON.stringify(notesData), function (err) {
         if(err) {
           return console.log(err)
         } else {
