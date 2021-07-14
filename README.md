@@ -17,7 +17,7 @@
 
   This app is designed for a user who wants to add info into a note taking system. Using mainly Express, the note taker adds a note, saves the entered text, and appends this as a new note. Additionally, the user can delete any note they'd like to once the user no longer deems it necessary.
 
-  Technologies used were: HTML, CSS, jQuery, Bootstrap, Javascript, Node, Express, fs, path, markdown, Git, and Heroku. Please render on Chrome for best results. 
+  Technologies used: HTML, CSS, jQuery, Bootstrap, Javascript, Node, Express, fs, path, markdown, Git, and Heroku. Please render on Chrome for best results. 
 
   * Check out deployed app on GitHub >> https://tedheikkila.github.io/note-taker/ 
 
@@ -32,13 +32,13 @@
 
   Here's the essentials for what you need to know to use this app: 
 
-  Start the app using the start button. Hit the add button in the upper-right hand corner of the page. Type a note into the text field. Click the save button. This note is now saved onto the left-hand side of the page and a new note is ready to be entered. 
+  Run node server.js on root path of app in VSC's integrated terminal CLI. Open browser and type localhost:3000 in browser URL line. Start the app using the get started button. Hit the add button in the upper-right hand corner of the page or start typing into text area. Type a note into the text field. Click the save button. This note is now saved onto the left-hand side of the page and a new note is ready to be entered. If you want to remove a note just click the trash button. Each save and delete event will subsequently update the db.json file accordingly. 
 
   ## Contributing
 
   To contribute to this app, please follow these instructions: 
   
-  If someone knows how to develop the delete a note code that would be appreciated. Please add descriptive commit messages and comments. Remember to do a npm install for express and other relevant packages, then create a .gitignore for the node_modules and package-lock.json folder if/when pushing to GitHub.
+  Please add descriptive commit messages and comments. Remember to do a npm install for express and other relevant packages, then create a .gitignore for the node_modules and package-lock.json folder if/when pushing to GitHub.
 
   ## License
   

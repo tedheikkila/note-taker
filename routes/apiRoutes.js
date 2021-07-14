@@ -1,9 +1,11 @@
-// loading in json data; linking routes to data source
+// API routes
 
+// require in statements
 const fs = require('fs');
 const path = require('path');
 const notesData = require("../db/db.json");
 
+// app features
 module.exports = app => {
 
   // get API endpoint
@@ -17,7 +19,7 @@ module.exports = app => {
     let jsonPath = path.join(__dirname, "../db/db.json");
     let newNote = req.body;
 
-    // setting up id's for pushes/save events
+    // set up id's for pushes/save events
     let idEl = 0
     for (let i = 0; i < notesData.length; i++) {
       let oneNote = notesData[i];
@@ -29,44 +31,44 @@ module.exports = app => {
 
     newNote.id = idEl + 1
 
-    // pushes new note to db
+    // pushs new note to db
     notesData.push(newNote)
 
-    // re-writes the db
+    // re-write db
     fs.writeFile(jsonPath, JSON.stringify(notesData), function (err) {
       if (err) {
         return console.log(err)
-      } console.log("note saved")
+      } console.log("saved note")
     });
 
-    // sends to new note to browser
+    // sends new note to client
     res.json(newNote)
   })
 
-  // delete a note w/specific id
+  // delete note w/specific id
   app.delete('/api/notes/:id', function (req, res) {
-      let jsonPath = path.join(__dirname, "../db/db.json")
-      
-      //splices out note from array of objects when db id = param id
-      for (let i = 0; i < notesData.length; i++) {
-        // finding id match
-        let target = notesData[i].id
-        if (target == req.params.id) {
+    let jsonPath = path.join(__dirname, "../db/db.json")
+
+    //splices out note from array of objects when db id = param id
+    for (let i = 0; i < notesData.length; i++) {
+      // finding id match
+      let target = notesData[i].id
+      if (target == req.params.id) {
 
         notesData.splice(i, 1);
         break;
-        }
+      }
+    }
+
+    // re-write db file again w/specified note now removed from db
+    fs.writeFileSync(jsonPath, JSON.stringify(notesData), function (err) {
+      if (err) {
+        return console.log(err)
+      } else {
+        console.log("deleted note")
       }
 
-      // re-write db file again w/ note now removed from db
-      fs.writeFileSync(jsonPath, JSON.stringify(notesData), function (err) {
-        if(err) {
-          return console.log(err)
-        } else {
-          console.log("note deleted")
-        }
-
-      });
-      res.json(notesData)
+    });
+    res.json(notesData)
   });
 }

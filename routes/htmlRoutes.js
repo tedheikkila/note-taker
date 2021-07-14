@@ -1,10 +1,10 @@
-// dependencies: include the path package to get the correct file path for our html
+// HTML routes
 
+// require statements
 const path = require('path');
 
-// routing:
+// app features:
 module.exports = (app) => {
-  // HTML gets: handles when users "visit" a page
 
   // notes page
   app.get('/notes', (req, res) => {

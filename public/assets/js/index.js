@@ -22,7 +22,7 @@ const hide = (elem) => {
   elem.style.display = 'none';
 };
 
-// activeNote is used to keep track of the note in the textarea
+// activeNote used to keep track of the note in the textarea
 let activeNote = {};
 
 const getNotes = () =>
@@ -42,7 +42,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
-  const deleteNote = (id) =>
+const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
@@ -102,7 +102,7 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
-// sets the activeNote to and empty object and allows the user to enter a new note
+// sets the activeNote to an empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   renderActiveNote();
@@ -116,7 +116,7 @@ const handleRenderSaveBtn = () => {
   }
 };
 
-// render the list of note titles
+// renders the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
