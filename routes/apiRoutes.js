@@ -2,52 +2,71 @@
 
 const fs = require('fs');
 const path = require('path');
+const notesData = require("../db/db.json");
 
 module.exports = app => {
 
-  // readFile set up for all functions since we need json visibility at all times
-  fs.readFile('db/db.json', "utf8", (err, data) => {
+  // get API endpoint
+  app.get('/api/notes', function (req, res) {
+    // sends db to client
+    res.json(notesData)
+  })
 
-    if (err) throw err;
+  // post API endpoint
+  app.post('/api/notes', function (req, res) {
+    let jsonPath = path.join(__dirname, "../db/db.json");
+    let newNote = req.body;
 
-    // store data of db.json file in notes
-    let notes = JSON.parse(data);
+    // setting up id's for pushes/save events
+    let idEl = 20
+    for (let i = 0; i < notesData.length; i++) {
+      let oneNote = notesData[i];
 
-    console.log(data)
-
-    // sets up note route for get notes
-    app.get('/api/notes', (req, res) => res.json(notes));
-
-    // post to api/notes
-    app.post('/api/notes', function (req, res) {
-      // receives new note, adds it to db.json, then returns new note
-      let newNote = req.body;
-      notes.push(newNote);
-      updateNotes();
-      return console.log("added: " + newNote.title);
-    });
-
-    // retrieves note with specific id
-    app.get('/api/notes/:id', function (req, res) {
-      // display json for the notes provided id
-      res.json(notes[req.params.id]);
-    });
-
-    // deletes a note for an id
-    app.delete('/api/notes/:id', function (req, res) {
-      notes.splice(req.params.id, 1);
-      updateNotes();
-      console.log("deleted note: " + req.params.id);
-    });
-
-    // updates json file when a note is added or deleted
-    function updateNotes() {
-      fs.writeFile('db/db.json', JSON.stringify(notes), err => {
-        if (err) throw err;
-        return true;
-      });
+      if (oneNote.id > idEl) {
+        idEl = oneNote.id
+      }
     }
 
-  });
+    newNote.id = idEl + 1
 
+    // pushes new note to db
+    notesData.push(newNote)
+
+    // re-writes the db
+    fs.writeFile(jsonPath, JSON.stringify(notesData), function (err) {
+      if (err) {
+        return console.log(err)
+      } console.log("note saved")
+    });
+
+    // sends to new note to client
+    res.json(newNote)
+
+  })
+
+  // delete a note w/specific id
+  app.delete('api/notes/:id', function (req, res) {
+      let jsonPath = path.join(__dirname, "../db/db.json")
+      
+      //splices out note from array of objects when db id = param id
+      for (let i = 0; i < notesData.length; i++) {
+
+        if (notesData[i].id == req.params.id) {
+
+        notesData.splice(i, 1);
+        break;
+        }
+      }
+
+      // re-write db file again w/ note now removed from db
+      fs.writeFileSync(jsonPath, JSON.stringify(notesData), function (err) {
+        if(err) {
+          return console.log(err)
+        } else {
+          console.log("note deleted")
+        }
+
+      });
+      res.json(notesData)
+  });
 }
