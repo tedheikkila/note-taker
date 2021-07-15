@@ -82,6 +82,10 @@ body {
   cursor: pointer;
 }
 
+.list-group-item {
+  background-color: rgb(252, 252, 164);
+}
+
 .list-container .list-group-item {
   border-left: none;
   border-right: none;
