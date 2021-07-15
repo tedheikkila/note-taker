@@ -9,7 +9,7 @@
   - [License](#license)
   - [Tests](#tests)
   - [Questions](#questions)
-  - [Screenshots](#screenshots)
+  - [Demo](#demo)
 
   ## Description
 
@@ -52,28 +52,6 @@
 
   * If you have any questions/concerns regarding the app, please contact me on GitHub here: https://github.com/tedheikkila
 
-  ## Screenshots
+  ## Demo
 
-* homepage 
-
-<!-- ![](./images/hw11-1.png) -->
-
-* add note
-
-<!-- ![](./images/hw11-2.png) -->
-
-* type in text to note
-
-<!-- ![](./images/hw11-3.png) -->
-
-* save note
-
-<!-- ![](./images/hw11-4.png) -->
-
-* note saved
-
-<!-- ![](./images/hw11-5.png) -->
-
-* return to homepage
-
-<!-- ![](./images/hw11-6.png) -->
+* Check out the tutorial here >> https://drive.google.com/file/d/15KibmWgIyU-BS4KuNEjbrT9BJclmNU-f/view?usp=sharing 
