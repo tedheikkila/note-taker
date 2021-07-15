@@ -19,9 +19,7 @@
 
   Technologies used: HTML, CSS, jQuery, Bootstrap, Javascript, Node, Express, fs, path, markdown, Git, and Heroku. Please render on Chrome for best results. 
 
-  * Check out deployed app on GitHub >> https://tedheikkila.github.io/note-taker/ 
-
-  * Check out deployed app on Heroku >>   https://fatidique-saucisson-41554.herokuapp.com/ 
+  * Check out the deployed app on Heroku >> https://fatidique-saucisson-41554.herokuapp.com/ 
 
 
   ## Installation
