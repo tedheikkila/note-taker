@@ -56,6 +56,7 @@ module.exports = app => {
       if (target == req.params.id) {
 
         notesData.splice(i, 1);
+        console.log("deleted note")
         break;
       }
     }
@@ -64,10 +65,7 @@ module.exports = app => {
     fs.writeFileSync(jsonPath, JSON.stringify(notesData), function (err) {
       if (err) {
         return console.log(err)
-      } else {
-        console.log("deleted note")
       }
-
     });
     res.json(notesData)
   });
